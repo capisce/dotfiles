@@ -44,52 +44,74 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    wget
+    coreutils
+    curl
+    dmenu
+    haskellPackages.xmobar
+    haskellPackages.xmonad
+    haskellPackages.xmonad-extras
+    haskellPackages.xmonad-contrib
+    kdeApplications.konsole
     vim
+    wget
+    xclip
+    xorg.xmodmap
   ];
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
   services.nixosManual.showManual = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
+  services.xserver = {
+    enable = true;
+    layout = "us";
 
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+    # symlink X server configuration under /etc/X11/xorg.conf
+    exportConfiguration = true;
 
-  services.xserver.synaptics.enable = true;
-  services.xserver.synaptics.twoFingerScroll = true;
+    synaptics = {
+      enable = true;
+      twoFingerScroll = true;
 
-  # services.xserver = {
-  #   windowManager.xmonad = {
-  #     enable = true;
-  #     enableContribAndExtras = true;
-  #     # extraPackages = haskellPackages: [
-  #     #   haskelPackages.xmonad-contrib
-  #     #   haskelPackages.xmonad-extras
-  #     #   haskelPackages.xmonad
-  #     # ];
-  #   };
-  #   desktopManager.default = "gnome3";
-  #   desktopManager.gnome3.enable = true;
-  #   # windowManager.default = "xmonad";
-  # };
+      accelFactor = "0.015";
+      minSpeed = "0.8";
+      maxSpeed = "1.4";
+
+      # reverse vertical scrolling (like on Mac OS X)
+      additionalOptions = ''
+        Option "VertScrollDelta" "-100"
+        Option "HorizScrollDelta" "100"
+      '';
+    };
+
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
+      extraPackages = haskellPackages: [
+        haskellPackages.xmonad-contrib
+        haskellPackages.xmonad-extras
+        haskellPackages.xmonad
+      ];
+    };
+
+    displayManager = {
+      slim.enable = true;
+      slim.defaultUser = "srodal";
+    };
+
+    # displayManager.sessionCommands = with pkgs; lib.mkAfter
+    #   ''
+    #   xmodmap /path/to/.Xmodmap
+    #   '';
+
+    windowManager.default = "xmonad";
+
+    desktopManager.default = "none";
+    desktopManager.xterm.enable = false;
+
+    xkbVariant = "colemak";
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.srodal = {
@@ -108,5 +130,4 @@
   # Auto-upgrade?
   # To see when the service runs, see systemctl list-timers
   # system.autoUpgrade.enable = true;
-
 }
