@@ -41,11 +41,14 @@
     haskellPackages.xmonad-contrib
     htop
     kdeApplications.konsole
+    networkmanagerapplet
     psmisc
+    stalonetray
     vim
     wget
     xclip
     xorg.xmodmap
+    xscreensaver
   ];
 
   # Enable the OpenSSH daemon.
@@ -89,6 +92,12 @@
     displayManager = {
       slim.enable = true;
       slim.defaultUser = "srodal";
+      sessionCommands = with pkgs; lib.mkAfter
+        ''
+        xscreensaver -no-splash &
+        nm-applet --sm-disable &
+        '';
+
     };
 
     windowManager.default = "xmonad";
