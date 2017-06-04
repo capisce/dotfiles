@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
+import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
 
 main = do
@@ -10,6 +11,7 @@ main = do
       { borderWidth = 2
       , focusFollowsMouse = False
       , focusedBorderColor = colorFocusedBorder
+      , layoutHook = smartBorders $ layoutHook desktopConfig
       , normalBorderColor = colorNormalBorder
       , modMask = mod4Mask
       , terminal = "konsole"
