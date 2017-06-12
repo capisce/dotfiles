@@ -31,10 +31,23 @@
     defaultLocale = "en_US.UTF-8";
   };
 
+  fonts = {
+    enableFontDir = true;
+    fonts = with pkgs; [
+      inconsolata
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      proggyfonts
+      symbola
+    ];
+  };
+
   environment.systemPackages = with pkgs; [
     coreutils
     curl
     dmenu
+    ctags
     haskellPackages.xmobar
     haskellPackages.xmonad
     haskellPackages.xmonad-extras
@@ -52,7 +65,7 @@
   ];
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   services.nixosManual.showManual = true;
 
@@ -65,6 +78,7 @@
 
     synaptics = {
       enable = true;
+      horizontalScroll = false;
       twoFingerScroll = true;
       tapButtons = false;
 
@@ -75,7 +89,6 @@
       # reverse vertical scrolling (like on Mac OS X)
       additionalOptions = ''
         Option "VertScrollDelta" "-100"
-        Option "HorizScrollDelta" "100"
       '';
     };
 
@@ -108,6 +121,15 @@
     xkbVariant = "colemak";
   };
 
+  services.redshift = {
+    enable = true;
+    latitude = "60.397076";
+    longitude = "5.324383";
+    temperature.night = 2500;
+  };
+
+  time.timeZone = "Europe/Oslo";
+
   users.extraUsers.srodal = {
     name = "srodal";
     extraGroups = [
@@ -120,7 +142,7 @@
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.03";
-  
+
   # Auto-upgrade?
   # To see when the service runs, see systemctl list-timers
   # system.autoUpgrade.enable = true;
