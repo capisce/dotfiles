@@ -34,10 +34,13 @@ main = do
       `additionalKeysP`
         [ ("M-e", spawn "emacs")
         , ("M-c", spawn "google-chrome-stable")
-        , ("M-p", spawn "dmenu_run -fn 'monospace-18' -b")
+        , ("M-p", spawn "dmenu_run -fn 'monospace-14' -b")
         , ("M-q", spawn $ "killall xmobar; killall stalonetray;"
                        ++ "xmonad --recompile && xmonad --restart")
         , ("M-S-z", spawn "xscreensaver-command -lock")
+        , ("<XF86AudioMute>", spawn "amixer set Master toggle")
+        , ("<XF86AudioLowerVolume>", spawn "amixer set Master 2%-")
+        , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 2%+")
         ]
 
 colorNormalBorder = "#CCCCC6"
