@@ -29,6 +29,11 @@
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "en-latin9";
     defaultLocale = "en_US.UTF-8";
+
+    inputMethod = {
+        enabled = "fcitx";
+        fcitx.engines = with pkgs.fcitx-engines; [ unikey ];
+    };
   };
 
   fonts = {
