@@ -62,7 +62,9 @@
     networkmanagerapplet
     psmisc
     stalonetray
+    stow
     vim
+    vimPlugins.pathogen
     wget
     xclip
     xorg.xmodmap
