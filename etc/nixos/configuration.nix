@@ -43,7 +43,7 @@
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
-      proggyfonts
+      source-code-pro
       symbola
     ];
   };
@@ -53,6 +53,8 @@
     curl
     dmenu
     ctags
+    emacs
+    ghc
     haskellPackages.xmobar
     haskellPackages.xmonad
     haskellPackages.xmonad-extras
