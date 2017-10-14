@@ -73,6 +73,8 @@
     xscreensaver
   ];
 
+  hardware.pulseaudio.enable = true;
+
   programs.bash.enableCompletion = true;
 
   # Enable the OpenSSH daemon.
