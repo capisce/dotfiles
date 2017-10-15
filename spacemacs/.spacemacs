@@ -36,13 +36,17 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     c-c++
+     emacs-lisp
+     git
+     haskell
      helm
+     html
+     javascript
+     org
      ;; auto-completion
      ;; better-defaults
-     emacs-lisp
-     ;; git
      ;; markdown
-     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
