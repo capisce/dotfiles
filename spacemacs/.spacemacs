@@ -305,9 +305,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq org-link-frame-setup '((file . find-file)))
-  (setq org-todo-keywords
-    '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE"))))
+  )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -317,8 +315,40 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; <SPC f e R> to reload
-  (spacemacs/set-leader-keys "oc" 'org-capture)
+
+  (setq vc-follow-symlinks t)
+
+  (defun capisce/home () (interactive) (find-file "~/tiddly/Home.org"))
+  (defun capisce/gtd () (interactive) (find-file "~/wiki/GTD.org"))
+  (defun capisce/playground () (interactive) (find-file "~/wiki/playground.org"))
+  (defun capisce/notes () (interactive) (find-file "~/wiki/notes.org"))
+
+  (setq org-default-notes-file "~/wiki/notes.org")
+  (setq org-agenda-ndays 7)
+  (setq org-deadline-warning-days 14)
+  (setq org-start-on-weekday nil)
+  (setq org-reverse-note-order t)
+  (setq org-link-frame-setup '((file . find-file)))
+  (setq org-todo-keywords
+        '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+  (spacemacs/set-leader-keys
+    "oc" 'org-capture
+    "or" 'org-refile
+    "od" 'spacemacs/find-dotfile
+    "oh" 'capisce/home
+    "og" 'capisce/gtd
+    "on" 'capisce/notes
+    "op" 'capisce/playground)
+  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
+  (setq org-capture-templates
+        '(("t" "Todo" entry (file+headline "~/wiki/GTD.org" "Tasks")
+           "* TODO %?\n  %i")
+          ("n" "Note" entry (file+datetree "~/wiki/notes.org")
+           "* %?")
+          ("j" "Journal" entry (file+datetree "~/wiki/journal.org")
+           "* %?")))
   (evil-define-key 'normal org-mode-map (kbd "C-f") 'ace-link-org)
+
   (define-key evil-motion-state-map (kbd "<backspace>") ":noh<cr>"))
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -328,6 +358,7 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/wiki/GTD.org")))
  '(package-selected-packages
    (quote
     (ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
