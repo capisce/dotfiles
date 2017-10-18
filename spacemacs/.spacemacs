@@ -318,34 +318,49 @@ you should place your code here."
 
   (setq vc-follow-symlinks t)
 
-  (defun capisce/home () (interactive) (find-file "~/tiddly/Home.org"))
-  (defun capisce/gtd () (interactive) (find-file "~/wiki/GTD.org"))
-  (defun capisce/playground () (interactive) (find-file "~/wiki/playground.org"))
-  (defun capisce/notes () (interactive) (find-file "~/wiki/notes.org"))
+  (defun capisce/home () (interactive) (find-file "~/org/Home.org"))
+  (defun capisce/gtd () (interactive) (find-file "~/org/GTD.org"))
+  (defun capisce/playground () (interactive) (find-file "~/org/playground.org"))
+  (defun capisce/ideas () (interactive) (find-file "~/org/Ideas.org"))
+  (defun capisce/notes () (interactive) (find-file "~/org/Notes.org"))
+  (defun capisce/journal () (interactive) (find-file "~/org/Journal.org"))
 
-  (setq org-default-notes-file "~/wiki/notes.org")
   (setq org-agenda-ndays 7)
   (setq org-deadline-warning-days 14)
-  (setq org-start-on-weekday nil)
-  (setq org-reverse-note-order t)
+  (setq org-agenda-start-on-weekday nil)
   (setq org-link-frame-setup '((file . find-file)))
   (setq org-todo-keywords
-        '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+        '((sequence "TODO(t)" "IN-PROGRESS(i!/@)" "WAITING(w@/!)" "|"
+                    "DONE(d!)" "DEFERRED(D@)" "CANCELLED(c@)")
+          (sequence "EVENT(e)" "ACTIVITY(a)")
+          (sequence "IDEA(I)" "NOTE(N)")))
+
+  (setq org-pomodoro-audio-player (executable-find "ogg123"))
+  (setq org-pomodoro-start-sound "~/Pollux.ogg")
+  (setq org-pomodoro-finished-sound "~/Pollux.ogg")
+  (setq org-pomodoro-short-break-sound "~/Pollux.ogg")
+  (setq org-pomodoro-long-break-sound "~/Pollux.ogg")
+
   (spacemacs/set-leader-keys
     "oc" 'org-capture
     "or" 'org-refile
     "od" 'spacemacs/find-dotfile
     "oh" 'capisce/home
     "og" 'capisce/gtd
+    "oi" 'capisce/ideas
+    "oj" 'capisce/journal
     "on" 'capisce/notes
     "op" 'capisce/playground)
+
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline "~/wiki/GTD.org" "Tasks")
+        '(("t" "Todo" entry (file+headline "~/org/GTD.org" "Tasks")
            "* TODO %?\n  %i")
-          ("n" "Note" entry (file+datetree "~/wiki/notes.org")
-           "* %?")
-          ("j" "Journal" entry (file+datetree "~/wiki/journal.org")
+          ("n" "Note" entry (file+datetree "~/org/Notes.org")
+           "* NOTE %?")
+          ("i" "Idea" entry (file+headline "~/org/Ideas.org" "Ideas")
+           "* Idea %?")
+          ("j" "Journal" entry (file+datetree "~/org/Journal.org")
            "* %?")))
   (evil-define-key 'normal org-mode-map (kbd "C-f") 'ace-link-org)
 
@@ -358,10 +373,13 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/wiki/GTD.org")))
+ '(org-agenda-files (quote ("~/org/GTD.org")))
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m org-drill)))
  '(package-selected-packages
    (quote
-    (evil-snipe smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode livid-mode skewer-mode simple-httpd less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc intero flycheck hlint-refactor hindent helm-hoogle helm-css-scss haskell-snippets yasnippet haml-mode emmet-mode disaster company-ghci company-ghc ghc company haskell-mode coffee-mode cmm-mode cmake-mode clang-format org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+    (helm-company helm-c-yasnippet fuzzy company-web web-completion-data company-tern dash-functional tern company-statistics company-cabal company-c-headers auto-yasnippet ac-ispell auto-complete evil-snipe smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode livid-mode skewer-mode simple-httpd less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc intero flycheck hlint-refactor hindent helm-hoogle helm-css-scss haskell-snippets yasnippet haml-mode emmet-mode disaster company-ghci company-ghc ghc company haskell-mode coffee-mode cmm-mode cmake-mode clang-format org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
  '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
