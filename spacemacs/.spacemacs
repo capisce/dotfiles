@@ -36,6 +36,7 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     auto-completion
      c-c++
      emacs-lisp
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
@@ -45,7 +46,6 @@ values."
      html
      javascript
      org
-     ;; auto-completion
      ;; better-defaults
      ;; markdown
      ;; (shell :variables
