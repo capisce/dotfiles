@@ -342,6 +342,7 @@ you should place your code here."
   (setq org-pomodoro-long-break-sound "~/Pollux.ogg")
 
   (spacemacs/set-leader-keys
+    "oa" 'org-agenda
     "oc" 'org-capture
     "or" 'org-refile
     "od" 'spacemacs/find-dotfile
@@ -357,9 +358,9 @@ you should place your code here."
         '(("t" "Todo" entry (file+headline "~/org/GTD.org" "Tasks")
            "* TODO %?\n  %i")
           ("n" "Note" entry (file+datetree "~/org/Notes.org")
-           "* NOTE %?")
+           "* %?")
           ("i" "Idea" entry (file+headline "~/org/Ideas.org" "Ideas")
-           "* Idea %?")
+           "* IDEA Idea %?")
           ("j" "Journal" entry (file+datetree "~/org/Journal.org")
            "* %?")))
   (evil-define-key 'normal org-mode-map (kbd "C-f") 'ace-link-org)
