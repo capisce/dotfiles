@@ -332,8 +332,8 @@ you should place your code here."
   (setq org-todo-keywords
         '((sequence "TODO(t)" "IN-PROGRESS(i!/@)" "WAITING(w@/!)" "|"
                     "DONE(d!)" "DEFERRED(D@)" "CANCELLED(c@)")
-          (sequence "EVENT(e)" "ACTIVITY(a)")
-          (sequence "IDEA(I)" "NOTE(N)")))
+          (sequence "EVENT(e)" "ACTIVITY(a)" "|" "CANCELLED(c@)")
+          (sequence "IDEA(I)" "NOTE(N)" "|" "SCRAPPED(s@)")))
 
   (setq org-pomodoro-audio-player (executable-find "ogg123"))
   (setq org-pomodoro-start-sound "~/Pollux.ogg")
