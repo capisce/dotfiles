@@ -26,20 +26,21 @@
   networking.networkmanager.enable = true;
 
   i18n = {
-    consoleFont = "ter-k24n.psf.gz";
+    consoleFont = "ter-k24n";
     consoleKeyMap = "en-latin9";
     defaultLocale = "en_US.UTF-8";
 
+    consolePackages = with pkgs; [ terminus_font ];
+
     inputMethod = {
-        enabled = "fcitx";
-        fcitx.engines = with pkgs.fcitx-engines; [ unikey ];
+      enabled = "fcitx";
+      fcitx.engines = with pkgs.fcitx-engines; [ unikey ];
     };
   };
 
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [
-      terminus_font
       inconsolata
       noto-fonts
       noto-fonts-cjk
