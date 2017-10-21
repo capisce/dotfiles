@@ -327,14 +327,18 @@ you should place your code here."
   (defun capisce/nixosconfiguration () (interactive) (find-file "/etc/nixos/configuration.nix"))
 
   (setq org-agenda-ndays 7)
-  (setq org-deadline-warning-days 14)
   (setq org-agenda-start-on-weekday nil)
+  (setq org-deadline-warning-days 14)
   (setq org-link-frame-setup '((file . find-file)))
   (setq org-todo-keywords
         '((sequence "TODO(t)" "IN-PROGRESS(i!/@)" "WAITING(w@/!)" "|"
                     "DONE(d!)" "DEFERRED(D@)" "CANCELLED(c@)")
           (sequence "EVENT(e)" "ACTIVITY(a)" "|" "CANCELLED(c@)")
           (sequence "IDEA(I)" "NOTE(N)" "|" "SCRAPPED(s@)")))
+
+  (setq org-drill-maximum-items-per-session 50)
+  (setq org-drill-maximum-duration 25) ; 25 minutes
+  (setq org-drill-add-random-noise-to-intervals-p t)
 
   (setq org-pomodoro-audio-player (executable-find "ogg123"))
   (setq org-pomodoro-start-sound "~/Pollux.ogg")
@@ -344,6 +348,7 @@ you should place your code here."
 
   (spacemacs/set-leader-keys
     "oa" 'org-agenda
+    "ob" 'org-iswitchb
     "oc" 'org-capture
     "or" 'org-refile
     "od" 'spacemacs/find-dotfile
@@ -357,7 +362,7 @@ you should place your code here."
 
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline "~/org/GTD.org" "Tasks")
+        '(("t" "Todo" entry (file+headline "~/org/GTD.org" "Inbox")
            "* TODO %?\n  %i")
           ("n" "Note" entry (file+datetree "~/org/Notes.org")
            "* %?")
