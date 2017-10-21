@@ -145,12 +145,11 @@
     xkbVariant = "colemak";
   };
 
-  services.redshift = {
+  services.redshift =
+  {
     enable = true;
-    latitude = "60.397076";
-    longitude = "5.324383";
-    temperature.night = 2500;
-  };
+    temperature.night = 2200;
+  } // import ./redshift.nix;
 
   time.timeZone = null;
 
