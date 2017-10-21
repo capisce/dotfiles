@@ -26,7 +26,7 @@
   networking.networkmanager.enable = true;
 
   i18n = {
-    consoleFont = "Lat2-Terminus16";
+    consoleFont = "ter-k24n.psf.gz";
     consoleKeyMap = "en-latin9";
     defaultLocale = "en_US.UTF-8";
 
@@ -39,6 +39,7 @@
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [
+      terminus_font
       inconsolata
       noto-fonts
       noto-fonts-cjk
