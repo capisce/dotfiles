@@ -15,9 +15,6 @@ nq () {
     }
 }
 
-if [ "$TERM" = "linux" ]; then
-    console-solarized
-    clear
-else
+if [ "$TERM" != "linux" ]; then
     eval `dircolors ~/.dircolors`
 fi
