@@ -142,7 +142,7 @@
     temperature.night = 2500;
   };
 
-  time.timeZone = "Europe/Oslo";
+  time.timeZone = null;
 
   users.extraUsers.srodal = {
     name = "srodal";
