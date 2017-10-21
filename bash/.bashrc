@@ -1,5 +1,3 @@
-eval `dircolors ~/.dircolors`
-
 nq () {
   local CACHE="$HOME/.cache/nq-cache"
   if ! ( [ -e $CACHE ] && [ $(stat -c %Y $CACHE) -gt $(( $(date +%s) - 3600 )) ] ); then
@@ -16,3 +14,10 @@ nq () {
        fi
     }
 }
+
+if [ "$TERM" = "linux" ]; then
+    console-solarized
+    clear
+else
+    eval `dircolors ~/.dircolors`
+fi
