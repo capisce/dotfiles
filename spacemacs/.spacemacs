@@ -324,6 +324,7 @@ you should place your code here."
   (defun capisce/ideas () (interactive) (find-file "~/org/Ideas.org"))
   (defun capisce/notes () (interactive) (find-file "~/org/Notes.org"))
   (defun capisce/journal () (interactive) (find-file "~/org/Journal.org"))
+  (defun capisce/nixosconfiguration () (interactive) (find-file "/etc/nixos/configuration.nix"))
 
   (setq org-agenda-ndays 7)
   (setq org-deadline-warning-days 14)
@@ -351,7 +352,8 @@ you should place your code here."
     "oi" 'capisce/ideas
     "oj" 'capisce/journal
     "on" 'capisce/notes
-    "op" 'capisce/playground)
+    "op" 'capisce/playground
+    "ox" 'capisce/nixosconfiguration)
 
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
   (setq org-capture-templates
