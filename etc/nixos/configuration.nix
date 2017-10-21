@@ -79,6 +79,12 @@
 
   programs.bash.enableCompletion = true;
 
+  services.emacs = {
+    enable = true;
+    install = true;
+    defaultEditor = true;
+  };
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 

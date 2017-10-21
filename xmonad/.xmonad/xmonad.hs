@@ -32,7 +32,7 @@ main = do
       , terminal = "konsole"
       }
       `additionalKeysP`
-        [ ("M-e", spawn "emacs")
+        [ ("M-e", spawn "emacsclient -c")
         , ("M-c", spawn "google-chrome-stable")
         , ("M-p", spawn "dmenu_run -fn 'monospace-14' -b")
         , ("M-q", spawn $ "killall xmobar; killall stalonetray;"
