@@ -3,7 +3,9 @@ import System.IO
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
+import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Run (spawnPipe)
 
@@ -27,13 +29,15 @@ main = do
                     , ppTitle = xmobarColor "gray" "" . shorten 40
                     , ppWsSep = " "
                     }
-      , normalBorderColor = colorNormalBorder
+      , manageHook = myManageHook <+> manageHook desktopConfig
       , modMask = mod4Mask
+      , normalBorderColor = colorNormalBorder
       , terminal = "konsole"
       }
       `additionalKeysP`
         [ ("M-e", spawn "emacsclient -c")
-        , ("M-c", spawn "google-chrome-stable")
+        , ("M-c", spawn "emacsclient -c -F \"((name . \\\"emacs-capture\\\"))\" -e \"(org-capture)\"")
+        , ("M-b", spawn "google-chrome-stable")
         , ("M-p", spawn "dmenu_run -fn 'monospace-14' -b")
         , ("M-q", spawn $ "killall xmobar; killall stalonetray;"
                        ++ "xmonad --recompile && xmonad --restart")
@@ -45,3 +49,5 @@ main = do
 
 colorNormalBorder = "#CCCCC6"
 colorFocusedBorder = "#FD971F"
+
+myManageHook = appName =? "emacs-capture" --> doRectFloat (W.RationalRect 0.2 0.25 0.6 0.5)

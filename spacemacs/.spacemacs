@@ -326,6 +326,18 @@ you should place your code here."
   (defun capisce/journal () (interactive) (find-file "~/org/Journal.org"))
   (defun capisce/nixosconfiguration () (interactive) (find-file "/etc/nixos/configuration.nix"))
 
+  (defadvice org-capture
+      (after make-full-window-frame activate)
+    "Advise capture to be the only window when used as a popup"
+    (if (equal "emacs-capture" (frame-parameter nil 'name))
+        (delete-other-windows)))
+
+  (defadvice org-capture-finalize
+      (after delete-capture-frame activate)
+    "Advise capture-finalize to close the frame"
+    (if (equal "emacs-capture" (frame-parameter nil 'name))
+        (delete-frame)))
+
   (setq org-agenda-ndays 7)
   (setq org-agenda-start-on-weekday nil)
   (setq org-deadline-warning-days 14)
