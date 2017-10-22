@@ -149,7 +149,9 @@
   services.redshift =
   {
     enable = true;
-    temperature.night = 2200;
+    temperature.day = 8000;
+    temperature.night = 2000;
+    brightness.night = "0.4";
   } // import ./redshift.nix;
 
   time.timeZone = null;
