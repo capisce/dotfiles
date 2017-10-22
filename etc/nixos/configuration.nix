@@ -26,6 +26,13 @@
   networking.hostName = "nixus";
   networking.networkmanager.enable = true;
 
+  nix = {
+    buildCores = 4;
+
+    # http://anderspapitto.com/posts/2015-11-01-nixos-with-local-nixpkgs-checkout.html
+    nixPath = pkgs.lib.mkBefore [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ];
+  };
+
   i18n = {
     consoleFont = "ter-k24n";
     consoleKeyMap = "en-latin9";
@@ -164,7 +171,7 @@
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.03";
+  system.stateVersion = "17.09";
 
   # Auto-upgrade?
   # To see when the service runs, see systemctl list-timers
