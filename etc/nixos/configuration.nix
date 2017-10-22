@@ -107,20 +107,14 @@
     # symlink X server configuration under /etc/X11/xorg.conf
     exportConfiguration = true;
 
-    synaptics = {
+    libinput = {
       enable = true;
-      horizontalScroll = false;
-      twoFingerScroll = true;
-      tapButtons = false;
+      tapping = false;
 
-      accelFactor = "0.015";
-      minSpeed = "0.8";
-      maxSpeed = "1.4";
-
-      # reverse vertical scrolling (like on Mac OS X)
-      additionalOptions = ''
-        Option "VertScrollDelta" "-100"
-      '';
+      accelProfile = "flat";
+      accelSpeed = "0.05";
+      naturalScrolling = true;
+      horizontalScrolling = false;
     };
 
     windowManager.xmonad = {
