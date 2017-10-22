@@ -6,8 +6,11 @@
       /etc/nixos/hardware-configuration.nix
     ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    grub.device = "/dev/sda";
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   boot.initrd.luks.devices = [
     {
@@ -19,8 +22,6 @@
   ];
 
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
-
-  boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "nixus";
   networking.networkmanager.enable = true;
