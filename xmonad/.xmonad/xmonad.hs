@@ -50,4 +50,4 @@ main = do
 colorNormalBorder = "#CCCCC6"
 colorFocusedBorder = "#FD971F"
 
-myManageHook = appName =? "emacs-capture" --> doRectFloat (W.RationalRect 0.2 0.25 0.6 0.5)
+myManageHook = appName =? "emacs-capture" --> doRectFloat (W.RationalRect 0.1 0.1 0.8 0.8)
