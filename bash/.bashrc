@@ -23,7 +23,3 @@ if [ "$TERM" != "linux" ]; then
     eval `dircolors ~/.dircolors`
 fi
 
-export EDITOR="emacsclient -t"
-
-# old habits die hard
-alias vi=$EDITOR
