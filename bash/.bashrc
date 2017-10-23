@@ -15,6 +15,10 @@ nq () {
     }
 }
 
+cdfind() {
+  cd `find . -name $1`
+}
+
 if [ "$TERM" != "linux" ]; then
     eval `dircolors ~/.dircolors`
 fi
