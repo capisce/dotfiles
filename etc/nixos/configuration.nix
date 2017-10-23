@@ -30,7 +30,10 @@
     buildCores = 4;
 
     # http://anderspapitto.com/posts/2015-11-01-nixos-with-local-nixpkgs-checkout.html
-    nixPath = pkgs.lib.mkBefore [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ];
+    nixPath = [
+      "nixpkgs=/etc/nixos/nixpkgs"
+      "nixos-config=/etc/nixos/configuration.nix"
+    ];
   };
 
   i18n = {
