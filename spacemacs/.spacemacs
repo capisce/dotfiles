@@ -353,10 +353,11 @@ you should place your code here."
   (setq org-drill-add-random-noise-to-intervals-p t)
 
   (setq org-pomodoro-audio-player (executable-find "ogg123"))
-  (setq org-pomodoro-start-sound "~/Pollux.ogg")
-  (setq org-pomodoro-finished-sound "~/Pollux.ogg")
-  (setq org-pomodoro-short-break-sound "~/Pollux.ogg")
-  (setq org-pomodoro-long-break-sound "~/Pollux.ogg")
+  (mapcar (lambda (var) (set var "~/Pollux.ogg"))
+    '(org-pomodoro-start-sound
+      org-pomodoro-finished-sound
+      org-pomodoro-short-break-sound
+      org-pomodoro-long-break-sound))
 
   (spacemacs/set-leader-keys
     "oa" 'org-agenda
