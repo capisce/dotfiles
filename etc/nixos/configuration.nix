@@ -62,6 +62,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    ag
     coreutils
     curl
     dmenu
@@ -75,9 +76,12 @@
     htop
     kdeApplications.konsole
     networkmanagerapplet
+    nodePackages.tern
     psmisc
+    reptyr # process reparenting
     stalonetray
     stow
+    tmux
     vim
     vimPlugins.pathogen
     wget
