@@ -316,6 +316,8 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; <SPC f e R> to reload
 
+  ;; Workaround for warning "Symbol’s value as variable is void: helm-bookmark-map"
+  (require 'helm-bookmark)
   (setq vc-follow-symlinks t)
 
   (defun capisce/home () (interactive) (find-file "~/org/Home.org"))
