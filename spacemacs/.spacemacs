@@ -328,6 +328,13 @@ you should place your code here."
   (defun capisce/journal () (interactive) (find-file "~/org/Journal.org"))
   (defun capisce/nixosconfiguration () (interactive) (find-file "/etc/nixos/configuration.nix"))
 
+  (defun capisce/kill-this-buffer ()
+    "Kill the current buffer."
+    (interactive)
+    (kill-buffer (current-buffer)))
+
+  (global-set-key (kbd "C-x k") 'capisce/kill-this-buffer)
+
   (defadvice org-capture
       (after make-full-window-frame activate)
     "Advise capture to be the only window when used as a popup"
