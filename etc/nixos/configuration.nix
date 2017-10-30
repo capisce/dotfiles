@@ -173,6 +173,11 @@
     uid = 1000;
   };
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 20;
+  };
+
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.09";
 
