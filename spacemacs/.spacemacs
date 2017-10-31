@@ -320,13 +320,33 @@ you should place your code here."
   (require 'helm-bookmark)
   (setq vc-follow-symlinks t)
 
+  (defun capisce/journal-file-today ()
+    (interactive)
+    "Return filename for today's journal entry."
+    (let ((daily-name (format-time-string "Journal-%Y-%m-%d.org")))
+      (expand-file-name (concat "~/org/journal/" daily-name))))
+
+  (defun capisce/journal ()
+    "Create and load a journal file based on today's date."
+    (interactive)
+    (find-file (capisce/journal-file-today))
+    (end-of-buffer))
+
+  (defun capisce/find-random-journal-entry ()
+    "Find a random journal entry."
+    (interactive)
+    (let ((files (directory-files "~/org/journal")))
+      (find-file
+       (concat "~/org/journal/"
+               (nth (random* (length files)) files)))))
+
   (defun capisce/home () (interactive) (find-file "~/org/Home.org"))
   (defun capisce/gtd () (interactive) (find-file "~/org/GTD.org"))
   (defun capisce/playground () (interactive) (find-file "~/org/playground.org"))
   (defun capisce/ideas () (interactive) (find-file "~/org/Ideas.org"))
   (defun capisce/notes () (interactive) (find-file "~/org/Notes.org"))
-  (defun capisce/journal () (interactive) (find-file "~/org/Journal.org"))
   (defun capisce/nixosconfiguration () (interactive) (find-file "/etc/nixos/configuration.nix"))
+  (defun capisce/strategy () (interactive) (find-file "~/org/Strategy.org"))
 
   (defun capisce/kill-this-buffer ()
     "Kill the current buffer."
@@ -378,9 +398,11 @@ you should place your code here."
     "og" 'capisce/gtd
     "oi" 'capisce/ideas
     "oj" 'capisce/journal
+    "oJ" 'capisce/find-random-journal-entry
     "on" 'capisce/notes
     "op" 'capisce/playground
-    "ox" 'capisce/nixosconfiguration)
+    "ox" 'capisce/nixosconfiguration
+    "os" 'capisce/strategy)
 
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
   (setq org-capture-templates
@@ -390,7 +412,7 @@ you should place your code here."
            "* NOTE %?")
           ("i" "Idea" entry (file+headline "~/org/Ideas.org" "Ideas")
            "* IDEA %?")
-          ("j" "Journal" entry (file+datetree "~/org/Journal.org")
+          ("j" "Journal" entry (function capisce/journal)
            "* %?")))
   (evil-define-key 'normal org-mode-map (kbd "C-f") 'ace-link-org)
 
