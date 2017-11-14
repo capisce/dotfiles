@@ -370,7 +370,7 @@ you should place your code here."
   (setq org-agenda-ndays 7)
   (setq org-agenda-start-on-weekday nil)
   (setq org-deadline-warning-days 14)
-  (setq org-habit-graph-column 45)
+  (setq org-habit-graph-column 49)
   (setq org-link-frame-setup '((file . find-file)))
   (setq org-todo-keywords
         '((sequence "TODO(t)" "IN-PROGRESS(i!/@)" "WAITING(w@/!)" "|"
