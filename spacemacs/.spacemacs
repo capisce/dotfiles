@@ -346,6 +346,7 @@ you should place your code here."
   (defun capisce/ideas () (interactive) (find-file "~/org/Ideas.org"))
   (defun capisce/notes () (interactive) (find-file "~/org/Notes.org"))
   (defun capisce/nixosconfiguration () (interactive) (find-file "/etc/nixos/configuration.nix"))
+  (defun capisce/reading-log () (interactive) (find-file "~/org/Reading_Log.org"))
   (defun capisce/strategy () (interactive) (find-file "~/org/Strategy.org"))
 
   (defun capisce/kill-this-buffer ()
