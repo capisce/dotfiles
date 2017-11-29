@@ -332,13 +332,34 @@ you should place your code here."
     (find-file (capisce/journal-file-today))
     (end-of-buffer))
 
+  (defun capisce/random-journal-entry ()
+    "Returns the filename of a random journal entry."
+    (interactive)
+    (let ((files (directory-files "~/org/journal")))
+      (concat "~/org/journal/"
+              (nth (random* (length files)) files))))
+
   (defun capisce/find-random-journal-entry ()
     "Find a random journal entry."
     (interactive)
-    (let ((files (directory-files "~/org/journal")))
-      (find-file
-       (concat "~/org/journal/"
-               (nth (random* (length files)) files)))))
+    (find-file (capisce/random-journal-entry)))
+
+  (defun capisce/old-journal-entries ()
+    "Shows a buffer with a list of old journal entries."
+    (interactive)
+    (let ((buffer "*old-journal-entries*")
+          (entry (capisce/random-journal-entry))
+          (current-year (string-to-int (format-time-string "%Y" (current-time))))
+          (month-and-day-string (format-time-string "%m-%d")))
+      (with-output-to-temp-buffer buffer
+        (princ (format "[[file:%s][%s]]\n" entry entry))
+        (dolist (year (number-sequence 2013 (- current-year 1)))
+          (let* ((daily-name (format "Journal-%d-%s.org" year month-and-day-string))
+                 (file-name (expand-file-name (concat "~/org/journal/" daily-name))))
+            (when (file-exists-p file-name)
+              (princ (format "[[file:%s][%s]]\n" file-name file-name)))))
+        (switch-to-buffer buffer)
+        (org-mode))))
 
   (defun capisce/home () (interactive) (find-file "~/org/Home.org"))
   (defun capisce/gtd () (interactive) (find-file "~/org/GTD.org"))
@@ -400,7 +421,7 @@ you should place your code here."
     "og" 'capisce/gtd
     "oi" 'capisce/ideas
     "oj" 'capisce/journal
-    "oJ" 'capisce/find-random-journal-entry
+    "oJ" 'capisce/old-journal-entries
     "on" 'capisce/notes
     "op" 'capisce/playground
     "ox" 'capisce/nixosconfiguration
