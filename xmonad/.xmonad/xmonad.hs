@@ -8,6 +8,7 @@ import XMonad.Layout.NoBorders
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Run (spawnPipe)
+import XMonad.Util.Ungrab
 
 main = do
   xmproc <- spawnPipe "xmobar"
@@ -41,6 +42,9 @@ main = do
         , ("M-p", spawn "dmenu_run -fn 'monospace-14' -b")
         , ("M-q", spawn $ "killall xmobar; killall stalonetray;"
                        ++ "xmonad --recompile && xmonad --restart")
+        , ("<Print>", spawn "scrot screen_%Y-%m-%d-%H-%M-%S.png ")
+        , ("M-<Print>", unGrab >> spawn "scrot rect_%Y-%m-%d-%H-%M-%S.png -s")
+        , ("M-S-<Print>", spawn "scrot window_%Y-%m-%d-%H-%M-%S.png -u")
         , ("M-S-z", spawn "xscreensaver-command -lock")
         , ("<XF86AudioMute>", spawn "amixer set Master toggle")
         , ("<XF86AudioLowerVolume>", spawn "amixer set Master 2%-")

@@ -79,6 +79,7 @@
     nodePackages.tern
     psmisc
     reptyr # process reparenting
+    scrot
     stalonetray
     stow
     tmux
