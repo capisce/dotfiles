@@ -46,9 +46,9 @@ main = do
         , ("M-<Print>", unGrab >> spawn "scrot rect_%Y-%m-%d-%H-%M-%S.png -s")
         , ("M-S-<Print>", spawn "scrot window_%Y-%m-%d-%H-%M-%S.png -u")
         , ("M-S-z", spawn "xscreensaver-command -lock")
-        , ("<XF86AudioMute>", spawn "amixer set Master toggle")
-        , ("<XF86AudioLowerVolume>", spawn "amixer set Master 2%-")
-        , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 2%+")
+        , ("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
+        , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%")
+        , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%")
         ]
 
 colorNormalBorder = "#CCCCC6"
