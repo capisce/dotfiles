@@ -50,6 +50,8 @@ main = do
         , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%")
         , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%")
         , ("<XF86AudioMicMute>", spawn "pactl set-source-mute 1 toggle")
+        , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 5%")
+        , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 5%")
         ]
 
 colorNormalBorder = "#CCCCC6"
