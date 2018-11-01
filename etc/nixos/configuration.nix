@@ -162,7 +162,7 @@
     brightness.night = "0.4";
   } // import ./redshift.nix;
 
-  time.timeZone = null;
+  time.timeZone = "Europe/Tallinn";
 
   users.extraUsers.srodal = {
     name = "srodal";
