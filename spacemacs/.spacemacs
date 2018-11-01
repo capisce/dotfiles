@@ -349,7 +349,7 @@ you should place your code here."
     (interactive)
     (let ((buffer "*old-journal-entries*")
           (entry (capisce/random-journal-entry))
-          (current-year (string-to-int (format-time-string "%Y" (current-time))))
+          (current-year (string-to-number (format-time-string "%Y" (current-time))))
           (month-and-day-string (format-time-string "%m-%d")))
       (with-output-to-temp-buffer buffer
         (princ (format "[[file:%s][%s]]\n" entry entry))
