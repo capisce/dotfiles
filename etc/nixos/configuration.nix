@@ -94,6 +94,7 @@
   hardware.pulseaudio.enable = true;
 
   programs.bash.enableCompletion = true;
+  programs.chrome-token-signing.enable = true;
 
   services.emacs = {
     enable = true;
@@ -107,6 +108,8 @@
   services.nixosManual.showManual = true;
 
   services.mingetty = import ./mingetty.nix { inherit config; };
+
+  services.pcscd.enable = true;
 
   services.xserver = {
     enable = true;
