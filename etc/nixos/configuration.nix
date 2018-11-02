@@ -21,6 +21,8 @@
     }
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
 
   networking.hostName = "nixus";
