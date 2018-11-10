@@ -404,6 +404,8 @@ you should place your code here."
   (setq org-drill-maximum-duration 25) ; 25 minutes
   (setq org-drill-add-random-noise-to-intervals-p t)
 
+  (setq org-read-date-force-compatible-dates nil)
+
   (setq org-pomodoro-audio-player (executable-find "ogg123"))
   (mapcar (lambda (var) (set var "~/Pollux.ogg"))
     '(org-pomodoro-start-sound
