@@ -46,7 +46,7 @@ main = do
         , ("M-<Print>", unGrab >> spawn "scrot rect_%Y-%m-%d-%H-%M-%S.png -s")
         , ("M-S-<Print>", spawn "scrot window_%Y-%m-%d-%H-%M-%S.png -u")
         , ("M-S-z", spawn "xscreensaver-command -lock")
-        , ("<XF86AudioMute>", spawn "amixer set Master mute")
+        , ("<XF86AudioMute>", spawn "amixer set Master toggle")
         , ("<XF86AudioLowerVolume>", spawn "amixer set Master unmute; amixer set Master 5%-")
         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master unmute; amixer set Master 5%+")
         , ("<XF86AudioMicMute>", spawn "amixer set Capture toggle")
