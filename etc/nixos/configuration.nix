@@ -70,6 +70,7 @@
     dmenu
     ctags
     emacs
+    firefox
     ghc
     haskellPackages.xmobar
     haskellPackages.xmonad
