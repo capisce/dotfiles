@@ -386,7 +386,14 @@ you should place your code here."
     (interactive)
     (kill-buffer (current-buffer)))
 
+  (defun capisce/make ()
+    "Make in first parent folder containing Makefile."
+    (interactive)
+    (let ((default-directory (locate-dominating-file default-directory "Makefile")))
+      (helm-make 2)))
+
   (global-set-key (kbd "C-x k") 'capisce/kill-this-buffer)
+  (global-set-key (kbd "C-x m") 'capisce/make)
   (global-set-key (kbd "C-x f") 'find-file-in-repository)
   (global-set-key (kbd "C-M-<tab>") 'clang-format-region)
 
