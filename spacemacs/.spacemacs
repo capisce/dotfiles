@@ -387,6 +387,8 @@ you should place your code here."
     (kill-buffer (current-buffer)))
 
   (global-set-key (kbd "C-x k") 'capisce/kill-this-buffer)
+  (global-set-key (kbd "C-x f") 'find-file-in-repository)
+  (global-set-key (kbd "C-M-<tab>") 'clang-format-region)
 
   (defadvice org-capture
       (after make-full-window-frame activate)
