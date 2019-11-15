@@ -165,13 +165,15 @@
     xkbVariant = "colemak";
   };
 
+  location = import ./location.nix;
+
   services.redshift =
   {
     enable = true;
     temperature.day = 8000;
     temperature.night = 3000;
     brightness.night = "0.7";
-  } // import ./redshift.nix;
+  };
 
   time.timeZone = "Europe/Tallinn";
 
